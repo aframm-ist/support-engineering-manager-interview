@@ -392,6 +392,160 @@
 
 ---
 
+## Part 2.5: Role Alignment & Career Clarity (15 minutes)
+
+**Purpose**: Determine if Douglas is better suited for **Support Manager**, **Professional Services Engineering Manager**, or **Solutions/Pre-Sales Engineering** role.
+
+---
+
+**Question**: What energizes you most at work—and what drains you?
+
+**What to Look For**:
+- **Energized by**:
+  - Customer relationships & customer success? → Tier 2 Support / PS Engineering
+  - Team development & mentorship? → Support Manager
+  - Building/architecting new systems? → PS Engineering / Solutions Engineering
+  - Process improvement & ops excellence? → Support Manager
+  - Problem-solving & firefighting? → Tier 2 Support
+- **Drained by**:
+  - Repetitive work? → Manager (needs to delegate)
+  - People conflicts? → Probably not a manager
+  - Customer hand-holding? → Support Manager might be frustrated
+  - Not shipping fast enough? → PS Engineering / Solutions (wants delivery)
+  - Strategic work (no hands-on)? → Wants to be IC/Technical (Tier 2 Support)
+
+**Follow-ups**:
+- "In your last role, what was the best week you had? What were you doing?"
+- "What was the worst week? What were you avoiding?"
+- "If you could do 3 days of one thing and 2 days of another, what split appeals to you?"
+
+---
+
+**Question**: Tell me about your favorite project you worked on. What made it satisfying?
+
+**What to Look For**:
+- **Support Manager fit**:
+  - "Building the support function from scratch at Harvest"
+  - "Scaling the team from 1 to 5 people"
+  - "Creating processes that stuck"
+  - Focus: creating systems, team growth, long-term impact
+  
+- **Tier 2 Support fit**:
+  - "Deep-diving into gnarly bugs"
+  - "Solving a production outage that had everyone stumped"
+  - "Finding a pattern across 50 customer issues"
+  - Focus: technical depth, customer impact, problem-solving
+  
+- **PS Engineering fit**:
+  - "Custom implementation for a big customer"
+  - "Building integrations between our product and customer systems"
+  - "Traveling to customer sites and understanding their use cases"
+  - "Delivering a complex deployment project on time"
+  - Focus: customer partnership, delivery, hands-on engineering
+
+**Red Flags**:
+- "I didn't really have a favorite" → Might be checking boxes, not energized
+- Only mentions process/operations, never mentions customer impact → Might be manager, not customer-facing
+- Only mentions internal projects, never customer-facing → Might be frustrated with customers
+
+---
+
+**Question**: Describe your relationship with customers. Do you prefer deep relationships or transactional interactions?
+
+**What to Look For**:
+- **Support Manager**:
+  - "I like knowing our TSEs have a good relationship with customers"
+  - "I prefer understanding customer needs at a strategic level, but not daily support"
+  - "I help TSEs navigate customer conflicts"
+  - Focus: internal team + strategic customer relationships
+
+- **Tier 2 Support**:
+  - "I love being the go-to person when customers hit complex issues"
+  - "I want to be known as the expert they trust"
+  - "I prefer async (tickets) or long-form communication"
+  - "Building credibility with power users"
+  
+- **PS Engineering**:
+  - "I love customer relationships. Meeting them in person is the best part"
+  - "Understanding their business and how our product fits their workflow"
+  - "Co-designing solutions with customers"
+  - "Hands-on during implementations"
+  - Focus: deep, ongoing customer partnership
+
+**Follow-ups**:
+- "Have you traveled to customer sites? Did you enjoy it?"
+- "In your last role, did you miss being hands-on with customers, or did you prefer stepping back?"
+- "If a customer called you personally to say 'thanks, you solved our problem,' what would that feel like?"
+
+**Red Flags**:
+- "Customers are always complaining" → Doesn't have customer empathy
+- "I prefer not to deal with customers" → Bad fit for any role at Istari (all three touch customers)
+- "I love customers but need to manage the relationship through a team" → More manager than PS
+
+---
+
+**Question**: What's your ideal balance between hands-on technical work and strategic/leadership work?
+
+**What to Look For**:
+- **Support Manager** (70% strategy, 30% hands-on):
+  - "I like having a few pet issues I dig into, but mostly I'm managing"
+  - "I'd rather unblock my team than troubleshoot myself"
+  - "Code/technical depth is less important than process clarity"
+  
+- **Tier 2 Support** (80% hands-on, 20% strategy):
+  - "I want to be solving problems, not managing people"
+  - "I'd rather debug than sit in meetings"
+  - "I like knowing I made a difference for a customer"
+  - "Management sounds boring"
+  
+- **PS Engineering** (50% hands-on, 50% strategic):
+  - "I want to design solutions AND implement them"
+  - "I like leading customer projects"
+  - "I don't want to manage a team, but I want to lead engagements"
+  - "Mix of technical depth and customer collaboration"
+
+**Example from resume**: He "inherited a mobile platform overhaul stalled for 100 days" and "restored shipping cadence within 30 days." Was that more appealing because:
+- He got to *lead/manage* the recovery (Manager)
+- He got to *solve* the technical problem (Tier 2)
+- He got to *deliver* a solution to a customer need (PS)
+
+**Red Flags**:
+- "I want to do everything" → Unclear on boundaries, might get overwhelmed
+- "I don't want to get my hands dirty anymore" → Might be burnt out on technical work
+- "I don't want to manage people but also don't want to be just an IC" → Wants IC+leadership = PS Engineering, but that's rare
+
+---
+
+**Question**: How do you measure success in a role?
+
+**What to Look For**:
+- **Support Manager**:
+  - "Team satisfaction and retention"
+  - "Reduction in MTTR and repeat issues"
+  - "Customer satisfaction (via CSAT)"
+  - "Team member promotions or growth"
+  - "SLA metrics improving"
+  
+- **Tier 2 Support**:
+  - "Complex problems I solved"
+  - "Customers saying 'thank you'"
+  - "Technical mastery in a domain"
+  - "First-contact resolution rate"
+  - "Reputation as 'the expert'"
+  
+- **PS Engineering**:
+  - "Customer projects delivered on time"
+  - "Customer success with the implementation"
+  - "Repeat business from a customer"
+  - "Revenue from successful engagements"
+  - "Strong customer relationships and reference-ability"
+
+**Example from resume**: He mentions "100% roadmap delivery" after an acquisition. That sounds like:
+- **Manager metric**: Team delivered (leadership/accountability)
+- **Delivery metric**: On-time/on-scope (could be PS or Tier 2)
+
+---
+
 ## Part 3: Product Strategy & Fit (30 minutes)
 
 ### 3.1 Product Feedback Loop (15 min)

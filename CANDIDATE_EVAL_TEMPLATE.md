@@ -150,6 +150,28 @@
 
 ---
 
+## Part 4: Role Alignment Assessment
+
+### Best Fit Role (0–5 scale, where 5 = perfect fit)
+
+| Role | Rating | Notes |
+|------|--------|-------|
+| **Support Engineering Manager** | __/5 | Manages 2 TSEs, owns process, internal-facing |
+| **Customer Support Tier 2** | __/5 | Deep technical support, direct customer support, not managing |
+| **Professional Services Engineering Manager** | __/5 | Customer implementations, hands-on + leadership, project delivery |
+
+**Primary Recommendation**: ☐ Manager ☐ Tier 2 Support ☐ PS Engineering ☐ Hybrid/Other
+
+**Rationale** (1-2 sentences):
+
+**Key Decision Factors**:
+- Does he light up talking about people/team development or customer projects or technical depth?
+- Ideal balance: hands-on (80%) vs. strategic (20%)?
+- Success metrics he mentioned: team metrics, customer metrics, or technical metrics?
+- Travel/customer site visits: enjoy or endure?
+
+---
+
 ## Summary
 
 | Dimension | Rating | Threshold |
@@ -158,6 +180,7 @@
 | Leadership | __/5 | ≥4 |
 | Product Thinking | __/5 | ≥3 |
 | Istari Fit | __/5 | ≥4 |
+| **Role Alignment** | See above | Primary recommendation selected |
 
 **Overall Recommendation**:
 - [ ] **Strong Yes** — Recommend for offer
