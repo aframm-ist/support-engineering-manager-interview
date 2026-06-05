@@ -10,8 +10,8 @@
 
 ## Interview Structure
 
-**Total Duration**: 3 hours (or 2.5 hours with reduced follow-ups)  
-**Format**: Technical (90 min) → Leadership/Operations (60 min) → Product Strategy & Fit (30 min)
+**Total Duration**: 3–3.5 hours (or 2.5–3 hours with selective follow-ups)  
+**Format**: Technical (110 min) → Leadership/Operations (60 min) → Product Strategy & Fit (30 min)
 
 ---
 
@@ -50,6 +50,45 @@
 
 ---
 
+**Question**: A pod is stuck in `ImagePullBackOff`. Walk me through how you'd diagnose the issue and what steps you'd take to resolve it.
+
+**What to Look For**:
+- **Immediate investigation**: `kubectl describe pod` to see the event message (what registry? auth issue? image tag doesn't exist?)
+- **Registry access**: Do they check image pull secrets? Can the node reach the registry?
+- **Network/firewall**: Are they considering proxy, firewall, or air-gapped scenarios?
+- **Authentication**: Private registry credentials—how are they configured?
+- **Root causes**: Wrong image name, missing tag, incorrect secret, registry unavailable, node can't reach registry
+- **Verification**: How do they confirm the fix worked?
+
+**Follow-ups**:
+- "The image works in dev but not in prod. What's different?"
+- "You're in an air-gapped environment with a private registry. How do you set it up?"
+- "An image pull fails intermittently—works sometimes, fails other times. What would you check?"
+
+**Red Flags**:
+- Jumps to "rebuild the image" without investigating registry access
+- Doesn't consider network/firewall issues
+- No understanding of Kubernetes image pull secrets or private registries
+
+---
+
+**Question**: Tell me about a time you had to scale or resize a Kubernetes deployment in production. What did you need to consider, and what went wrong (if anything)?
+
+**What to Look For**:
+- **Planning**: Did they check current resource usage first? Understand how HPA works?
+- **Node capacity**: Did they check if the cluster had room for new pods?
+- **Disruption budgets**: Do they know about PodDisruptionBudgets and why they matter?
+- **Drain/evict**: How do they handle existing pods when adding/removing nodes?
+- **Testing**: Did they test in a staging environment first?
+- **Monitoring**: Did they watch metrics during the scale operation?
+- **Rollback**: What if it didn't go as planned? How did they recover?
+
+**Follow-ups**:
+- "You scaled up, but pods still have no capacity. What would you check?"
+- "You need to add a node during a business-critical time. What's your approach to minimize disruption?"
+
+---
+
 **Question**: Describe a time when you had to explain Kubernetes concepts—like Deployments vs. StatefulSets, or service discovery—to a customer or non-technical stakeholder. How did you approach it?
 
 **What to Look For**:
@@ -84,6 +123,51 @@
 - Understanding of storage costs, retention policies, query complexity
 - Recognition that "ship with observability" is better than "add it later"
 - Realistic understanding of operational burden
+
+---
+
+**Question**: You're being paged at 2 AM because of high error rates. Walk me through your incident response process—how do you triage, investigate, and communicate while debugging?
+
+**What to Look For**:
+- **Immediate actions**: Do they silence the alert or fix it? Check dashboards? Pull logs?
+- **Communication**: Do they notify stakeholders? Create an incident ticket?
+- **Investigation methodology**: How do they narrow down: is it a code issue, infrastructure issue, dependency, or configuration?
+- **Logs and metrics**: Can they correlate error spikes with deployment changes, traffic patterns, or external events?
+- **Runbooks**: Do they have documented procedures, or are they making it up as they go?
+- **Escalation**: When do they loop in other teams (database, platform, on-call engineer)?
+- **Post-incident**: Do they do a blameless post-mortem? Update the runbook?
+
+**Follow-ups**:
+- "The error rate is spiking, but you don't see any recent deployments. What else would you check?"
+- "You need to rollback a deploy at 2 AM. How do you do it safely?"
+- "The issue is intermittent and only affects certain customers. How do you narrow it down?"
+
+**Red Flags**:
+- No on-call experience or incident response process
+- Reactive troubleshooting without a methodology
+- Doesn't communicate with stakeholders during an incident
+- No post-incident follow-up (just "we fixed it" and moved on)
+
+---
+
+**Question**: Tell me about alert fatigue. Have you dealt with noisy or false-positive alerts? How did you fix it?
+
+**What to Look For**:
+- **Recognition**: Do they understand the problem of too many alerts?
+- **Root causes**: Overly sensitive thresholds, seasonal patterns, known transients
+- **Solutions**: Can they adjust alert rules, add context/deduplication, or implement better triggers?
+- **Collaboration**: Did they work with teams to understand what alerts actually matter?
+- **Examples**: Specific alerts they tuned (e.g., "CPU at 80% triggered every night during backups—we adjusted the threshold to 95%")
+- **Measurement**: Did they track improvements (alert volume, on-call fatigue, mean time to resolution)?
+
+**Follow-ups**:
+- "You're getting 10,000 alerts a day. Walk me through how you'd fix that."
+- "An alert fires correctly, but the team ignores it because it's always going off. What do you do?"
+
+**Red Flags**:
+- No experience with alerting systems
+- Thinks more alerts = better observability
+- Never evaluated or adjusted alert rules
 
 ---
 
