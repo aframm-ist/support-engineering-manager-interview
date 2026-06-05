@@ -10,12 +10,20 @@
 
 ## Interview Structure
 
-**Total Duration**: 2.5 hours  
-**Format**: Technical (1h) → Leadership/Operations (1h) → Product Strategy & Fit (30m)
+**Total Duration**: 3 hours (or 2.5 hours with reduced follow-ups)  
+**Format**: Technical (90 min) → Leadership/Operations (60 min) → Product Strategy & Fit (30 min)
 
 ---
 
-## Part 1: Technical Competency (60 minutes)
+## Part 1: Technical Competency (90 minutes)
+
+**Breakdown**:
+- 1.1 Kubernetes & Containers (10 min)
+- 1.2 Observability (8 min)
+- 1.3 Support Tooling (10 min)
+- 1.3b Infrastructure & DevOps (42 min) ← **Core required skills**
+- 1.4 APIs & Networking (10 min)
+- 1.5 Wrap-up & Buffer (10 min)
 
 ### 1.1 Kubernetes & Container Fundamentals (15 min)
 
@@ -103,6 +111,231 @@
 - **Feedback loop**: Do they escalate to product to fix the root cause?
 - **Team development**: Do they turn this into a training moment for TSEs?
 - **Process improvement**: Do they update support routing or intake to catch it earlier?
+
+---
+
+### 1.3b Infrastructure & DevOps Fundamentals (20 min)
+
+#### Docker & Container Specifics
+
+**Question**: Walk me through containerizing an application. What are the key decisions you make, and what mistakes have you seen?
+
+**What to Look For**:
+- Base image selection (official vs. distroless, size concerns)
+- Multi-stage builds (optimization, security)
+- Dockerfile best practices (layer caching, minimal layers, avoiding root)
+- Registry management (private registries, image signing, scanning)
+- Image size optimization (do they think about production footprint?)
+- Have they dealt with rootless containers or security contexts?
+
+**Follow-ups**:
+- "A container runs fine locally but fails on the customer's Kubernetes cluster. What would you investigate?"
+- "You're building an image for an air-gapped environment. What's different?"
+- "How do you balance image size with operational convenience?"
+
+**Red Flags**:
+- Never built a container image themselves
+- "Just use the official image" without understanding trade-offs
+- No awareness of image security (scanning, CVEs, signing)
+
+---
+
+**Question**: Tell me about a time you debugged a container networking issue—maybe a DNS problem, port binding, or connectivity between containers. Walk me through your troubleshooting.
+
+**What to Look For**:
+- Container networking fundamentals (bridge networks, overlay networks, service discovery)
+- DNS resolution issues (inside container vs. external)
+- Port exposure and firewall rules
+- Tools they'd use (`docker logs`, `docker exec`, `docker inspect`, `netstat`, `ping`, `curl`)
+- Understanding of localhost vs. container hostname vs. service DNS
+- How they'd test connectivity (curl, nc, telnet)
+
+---
+
+#### PostgreSQL & Relational Databases
+
+**Question**: You're called in because a PostgreSQL database is running slowly. Walk me through how you'd diagnose the issue. What metrics would you look at?
+
+**What to Look For**:
+- **System queries**: Can they read `pg_stat_statements`? Do they understand `EXPLAIN ANALYZE`?
+- **Connection management**: Are there too many connections? Idle connections? Blocking?
+- **Index health**: Do they think about missing indexes, bloated indexes?
+- **Disk I/O**: Are queries hitting disk vs. cache? Can they check buffer pool hit ratio?
+- **Configuration**: Do they know about `shared_buffers`, `work_mem`, `maintenance_work_mem`?
+- **Replication**: Do they understand lag, how to check it, what causes it?
+
+**Follow-ups**:
+- "A backup is taking 6 hours. The customer says it used to take 30 minutes. What changed?"
+- "You're migrating a customer to a managed database (RDS, CloudSQL). What gotchas are there?"
+- "How do you safely roll out a major version upgrade (12 → 13 → 14)?"
+
+**Red Flags**:
+- Never tuned a database or only used cloud-managed services
+- Can't explain replication, backups, or WAL (Write-Ahead Logging)
+- No understanding of ACID guarantees or transaction isolation
+
+---
+
+**Question**: Describe a database backup and recovery procedure. What's your approach, and what could go wrong?
+
+**What to Look For**:
+- Backup strategy: Full + incremental? PITR (Point-In-Time Recovery)?
+- Testing the backups: Do they actually test recovery? (Restore tests are often skipped!)
+- Recovery time objectives (RTO) and recovery point objectives (RPO)
+- Backup storage and retention policies
+- Encryption of backups
+- Cross-region or off-site backup storage
+- Understanding of logical vs. physical backups
+
+**Red Flags**:
+- Never tested a recovery
+- Assumes backups work without verification
+- No understanding of RTO/RPO trade-offs
+
+---
+
+#### Observability Tools (Prometheus, Grafana, Log Aggregation)
+
+**Question**: You need to set up monitoring and alerting for a Kubernetes cluster running a database-backed application. Walk me through your approach. What would you monitor, and what would you alert on?
+
+**What to Look For**:
+- **Metrics** (Prometheus):
+  - Application metrics (latency, error rate, throughput)
+  - Infrastructure metrics (CPU, memory, disk, network)
+  - Database metrics (connections, slow queries, replication lag)
+  - Do they understand cardinality? (Can they avoid exploding metric volumes?)
+- **Alerting**:
+  - Alert thresholds that are meaningful (not too strict, not too loose)
+  - Alert routing (who gets paged? on call?)
+  - Alert fatigue (do they recognize noisy alerts?)
+  - Runbook links with alerts
+- **Dashboards** (Grafana):
+  - What would they visualize?
+  - RED method (Rate, Errors, Duration) or USE method (Utilization, Saturation, Errors)?
+- **Logs**:
+  - Log aggregation tool (ELK, Splunk, Datadog, etc.)
+  - Structured logging (JSON) vs. unstructured
+  - Log retention and cost management
+  - Can they write useful log queries?
+
+**Follow-ups**:
+- "You're getting 10,000 alerts a day. What's wrong?"
+- "A customer is complaining about slow queries, but your monitoring doesn't show high load. What's going on?"
+- "You need to debug a one-time issue that happened at 3 AM. How do you approach it?"
+
+**Red Flags**:
+- No hands-on experience with Prometheus/Grafana
+- Only used third-party hosted observability (never self-hosted)
+- Can't explain cardinality or metric explosion risk
+- No understanding of alerting best practices
+
+---
+
+**Question**: Have you had to troubleshoot observability itself? (e.g., "we're not seeing metrics we expect," "log aggregation is slow," "we're missing data")
+
+**What to Look For**:
+- Pragmatic debugging of monitoring infrastructure
+- Understanding of data pipelines (scraping, shipping, querying)
+- Recognition that observability adds operational burden
+- Examples of iterating on observability as the system evolved
+
+---
+
+#### Linux Administration & Networking
+
+**Question**: A customer is having intermittent connection timeouts to their Istari instance. Walk me through how you'd investigate.
+
+**What to Look For**:
+- **Network diagnosis**:
+  - Tools: `ping`, `traceroute`, `netstat`, `tcpdump`, `ss`
+  - DNS resolution (`nslookup`, `dig`)
+  - Network namespaces (especially in Kubernetes context)
+  - Firewall rules and security groups
+- **Application level**:
+  - TCP connection pooling, idle timeout settings
+  - Read/write timeouts, connection timeout thresholds
+  - Retry logic and backoff strategies
+- **Infrastructure**:
+  - Kubernetes network policies
+  - Service discovery and load balancing
+  - Proxy or ingress configuration
+- **Customer environment**:
+  - Are they behind a proxy, firewall, or VPN?
+  - NAT or port forwarding?
+  - ISP or connectivity issues?
+
+**Follow-ups**:
+- "The issue only happens during business hours. What does that tell you?"
+- "You're migrating a customer from on-prem to cloud. What networking issues might they hit?"
+- "A customer uses Zscaler (SSL-inspecting proxy). What problems might that cause?"
+
+**Red Flags**:
+- Never used network diagnostic tools
+- Assumes "it's the network" without investigation
+- No understanding of how Kubernetes networking works
+- Can't explain DNS, NAT, or proxy concepts
+
+---
+
+**Question**: Tell me about a time you had to troubleshoot a TLS/certificate issue. What was the problem, and how did you solve it?
+
+**What to Look For**:
+- Common issues: expired certs, hostname mismatches, self-signed certs, intermediate cert chains
+- Tools: `openssl s_client`, certificate inspection, chain validation
+- Understanding of certificate rotation and renewal processes
+- How self-signed certs affect different scenarios (browsers, APIs, curl, Kubernetes)
+- Custom CA bundles and how to configure applications to trust them
+- Kubernetes-specific: where certs live (secrets, ingress, istio), how to rotate them
+
+**Red Flags**:
+- No hands-on TLS experience
+- "Just use Let's Encrypt" without understanding how it works
+- No awareness of certificate chains or intermediate certificates
+
+---
+
+#### REST & GraphQL APIs
+
+**Question**: You're integrating Istari with a customer's system. Their API requires authentication. Walk me through how you'd set it up and what could go wrong.
+
+**What to Look For**:
+- **Auth mechanisms**:
+  - API keys (basic auth, bearer tokens)
+  - OAuth2 and OpenID Connect
+  - Mutual TLS (mTLS)
+  - Custom headers and signatures
+- **Integration challenges**:
+  - Rate limiting and backoff/retry logic
+  - Timeout configuration
+  - Certificate pinning or custom CA trust
+  - Error handling and status codes
+  - Pagination and large result sets
+- **Security**:
+  - Never logging credentials
+  - Secure storage of secrets
+  - Audit logging of API calls
+
+**Follow-ups**:
+- "The API returns a 500 error on your integration test, but when you call it manually with curl, it works. What might be different?"
+- "How do you handle an API that changes its response format?"
+
+---
+
+**Question**: Describe the difference between REST and GraphQL. When would you recommend each? What are the operational implications?
+
+**What to Look For**:
+- **REST**: Stateless, resource-oriented, standard HTTP verbs, easy to cache and monitor
+- **GraphQL**: Flexible queries, single endpoint, over-fetching vs. under-fetching trade-offs
+- **Operational concerns**:
+  - Caching strategies (REST: HTTP caching easy; GraphQL: harder)
+  - Rate limiting (GraphQL: query complexity; REST: per-endpoint)
+  - Monitoring and debugging (GraphQL: opaque queries; REST: clear URLs)
+  - Error handling (structured vs. HTTP status codes)
+- **Customer context**: Do they think about API versioning and backwards compatibility?
+
+**Red Flags**:
+- No real experience with either
+- Strong opinion without understanding trade-offs
 
 ---
 
@@ -291,11 +524,20 @@
 ## Evaluation Rubric
 
 ### Technical (0–5 scale)
-- **5**: Deep hands-on K8s, observability, troubleshooting. Can architect a support tooling solution.
-- **4**: Solid experience. Can troubleshoot independently; knows when to escalate.
-- **3**: Competent but may need ramp-up in one area (e.g., observability). Can grow into the role.
-- **2**: Gaps in foundational knowledge. Would need significant mentoring.
-- **1**: Not suitable for this role technically.
+
+**Required competencies** (must score ≥3 in each):
+- **Kubernetes & containers**: Pod debugging, deployment strategies, networking, RBAC
+- **Databases (PostgreSQL)**: Query troubleshooting, performance tuning, replication, backups
+- **Observability**: Prometheus/Grafana experience, log aggregation, alerting strategy
+- **Linux & networking**: Diagnostic tools, TLS/certificates, DNS, network troubleshooting
+- **APIs**: REST and/or GraphQL integration, authentication, error handling
+
+**Overall Technical Rating**:
+- **5**: Deep hands-on across all required areas. Can architect solutions and mentor others.
+- **4**: Solid experience in all areas. Can troubleshoot independently; knows when to escalate.
+- **3**: Competent in most areas; minor gaps in 1–2 areas (e.g., database tuning). Can grow into the role.
+- **2**: Significant gaps in foundational knowledge (e.g., never tuned a database, no observability setup). Would need substantial mentoring.
+- **1**: Missing critical skills (e.g., no K8s, no Linux, no database experience). Not suitable for this role.
 
 ### Leadership (0–5 scale)
 - **5**: Proven manager. Builds teams, gives feedback, makes hard calls. Process-oriented.
